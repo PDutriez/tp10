@@ -1,10 +1,7 @@
 #ifndef DICE_H
 #define DICE_H
 
-int undado(int const caras);
-
-int unatirada(int cantdados,int caras);
-
-int fullroll (int tiradas,int cantdados,int caras);
-
+void fullroll (unsigned int tiradas,unsigned int cantdados,unsigned int caras);
+/*La funcion fullroll se encarga de tirar dados y aleatoriamente devolver, a
+* traves del stdout que este inicializado imprimir los resultados y su suma.*/
 #endif
