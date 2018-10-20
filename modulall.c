@@ -4,7 +4,7 @@
  * arreglos para guardar los argumentos que vamos a separar más adelante
  * en tres secciones distintas
  ******************************************************************************/
-static char * opciones [2][O_MAX];  //Arreglo con todas las opciones
+static char * opciones [2*O_MAX];  //Arreglo con todas las opciones
 static char * parametros [O_MAX];   //Arreglo con todos los parametros
 /******************************************************************************/
 char** checkopt(int argc,char* argv[])
@@ -14,13 +14,15 @@ char** checkopt(int argc,char* argv[])
     {
        if(*argv[word]=='-')
        {
-               opciones[0][options] = argv [word]; //Guardamos su clave y valor
+               opciones[options] = argv [word]; //Guardamos su clave y valor
                if(*argv[++word]!='-') //Implica que fue cargado el valor correctamente
-               opciones[1][options] = argv [word];
+               opciones[++options] = argv [word];
                else
-               printf("Valor de la opcion %d no encontrado",word);
-               ++options; //De todas formas debo aumentar el contador de opciones
-       }
+               {
+		 printf("Valor de la opcion %d no encontrado",word);
+                 ++options;
+       	       }
+	}
    }
    return opciones; //Cantidad total de opciones
 }
