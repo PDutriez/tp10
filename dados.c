@@ -12,7 +12,7 @@ void fullroll(unsigned int tiradas,unsigned int cantdados,unsigned int caras)
 {
 	int rollnum;		//variable de control, numero de tirada
 	srand(time(NULL));	//random seed
-	printf("Se están utilizando dados de %d caras.\n",caras);	//imprie encabezado
+	printf("Se están utilizando %d dados de %d caras.\n",cantdados,caras);	//imprie encabezado
 	for(rollnum=1;rollnum<=tiradas;rollnum++)
 	{
 		printf("Tirada %d:",rollnum);	//imprime subencabezado de tirada
@@ -37,8 +37,8 @@ static void unatirada(unsigned int const cantdados,unsigned int const caras)
 	for(i=0;i<cantdados;i++)
 	{
 		uno=undado(caras);
-		printf(", %d",uno);		//imprime result de cada dado
+		printf("  %d,",uno);		//imprime result de cada dado
 		total+=uno;				//los suma al total
 	}
-	printf(" - Suma:%d \n",total);	//imprime total
+	printf("\t- Suma:%d \n",total);	//imprime total
 }

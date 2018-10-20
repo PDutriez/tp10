@@ -14,16 +14,16 @@ char** checkopt(int argc,char* argv[])
     {
        if(*argv[word]=='-')
        {
-               opciones[options] = argv [word]; //Guardamos su clave y valor
+               opciones[options++] = argv [word]; //Guardamos su clave y valor
                if(*argv[++word]!='-') //Implica que fue cargado el valor correctamente
-               opciones[++options] = argv [word];
+                    opciones[options++] = argv [word];
                else
                {
-		 printf("Valor de la opcion %d no encontrado",word);
-                 ++options;
+		               printf("Valor de la opcion %d no encontrado",word);
+                   ++options;
        	       }
-	}
-   }
+	     }
+     }
    return opciones; //Cantidad total de opciones
 }
 
