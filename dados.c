@@ -6,7 +6,7 @@
 //Undado se encarga de tirar el nro random, recibe la cantidad de caras del dado
 static int undado(unsigned int const caras);
 //Unatirada se encarga de la ejecucion de una tirada, recibiendo la cantidad de dados y sus caras
-static int unatirada(unsigned int const cantdados,unsigned int const caras);
+static void unatirada(unsigned int const cantdados,unsigned int const caras);
 
 void fullroll(unsigned int tiradas,unsigned int cantdados,unsigned int caras)
 {
