@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "TP8dice.h"
+#include <time.h>
+#include "TP10dice.h"
 
 int main (void)
 {
@@ -47,6 +48,7 @@ int unatirada(int cantdados, int caras)
 int fullroll(int tiradas, int cantdados, int caras)
 {
 	int rollnum;		//variable de control, numero de tirada
+	srand(time(NULL));
 	printf("Se están utilizando dados de %d caras.\n",caras);	//imprie encabezado
 	for(rollnum=1;rollnum<=tiradas;rollnum++)
 	{
