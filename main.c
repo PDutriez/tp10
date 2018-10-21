@@ -28,7 +28,7 @@ int main(int argc,char* argv[])
   pointdados=searchvalue(opciones,countopt(argc,argv),"-cantidad");//Puntero a la cantidad de dados
   pointtiradas=searchvalue(opciones,countopt(argc,argv),"-tiradas");//Puntero a la cantidad de tiradas
   pointcaras=searchvalue(opciones,countopt(argc,argv),"-caras");//Puntero a la cantidad de caras
-  archivo=searchtxt(parametros,countpar(argc,argv));
+  archivo=searchtxt(parametros,countpar(argc,argv),".txt");
   if(archivo)
 	{
       output=fopen(archivo,"w");
