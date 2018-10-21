@@ -22,7 +22,7 @@ int main(int argc,char* argv[])
 	FILE *output;
  	int fileflag=0;
 	pointall_t opciones, parametros;//Arreglo con las opciones y los parametros
-  point_t pointdados, pointtiradas, pointcaras/*, archivo*/;
+  point_t pointdados, pointtiradas, pointcaras, archivo;
   opciones=checkopt(argc,argv);//Cantidad de opciones que hay
   parametros=checkpar(argc,argv);//Cantidad de parametros que hay
   pointdados=searchvalue(opciones,countopt(argc,argv),"-cantidad");//Puntero a la cantidad de dados
@@ -38,7 +38,7 @@ int main(int argc,char* argv[])
 	{
 		output=stdout;
 	}
-printf("tiradas: %u\t caras: %u\t cantidad: %u\n",passint(pointtiradas),passint(pointdados),passint(pointcaras));
+	
   fullroll(passint(pointtiradas),passint(pointdados),passint(pointcaras),output);
 
 	if(fileflag)
