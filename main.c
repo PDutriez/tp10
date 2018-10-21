@@ -22,14 +22,14 @@ int main(int argc,char* argv[])
 	FILE *output;
  	int fileflag=0;
 	pointall_t opciones, parametros;//Arreglo con las opciones y los parametros
-  point_t pointdados, pointtiradas, pointcaras, archivo;
+  point_t pointdados, pointtiradas, pointcaras/*, archivo*/;
   opciones=checkopt(argc,argv);//Cantidad de opciones que hay
   parametros=checkpar(argc,argv);//Cantidad de parametros que hay
   pointdados=searchvalue(opciones,countopt(argc,argv),"-cantidad");//Puntero a la cantidad de dados
   pointtiradas=searchvalue(opciones,countopt(argc,argv),"-tiradas");//Puntero a la cantidad de tiradas
   pointcaras=searchvalue(opciones,countopt(argc,argv),"-caras");//Puntero a la cantidad de caras
   archivo=searchtxt(parametros,countpar(argc,argv),".txt");
-  if(archivo)
+	if(archivo)
 	{
       output=fopen(archivo,"w");
 			fileflag=1;
@@ -38,7 +38,7 @@ int main(int argc,char* argv[])
 	{
 		output=stdout;
 	}
-
+printf("tiradas: %u\t caras: %u\t cantidad: %u\n",passint(pointtiradas),passint(pointdados),passint(pointcaras));
   fullroll(passint(pointtiradas),passint(pointdados),passint(pointcaras),output);
 
 	if(fileflag)
@@ -62,7 +62,7 @@ static char* searchvalue(char** arr,int arrsize,char* word)
         }
         if(status)//En caso de que no haya cambiado el valor de status implica que encontramos la palabra
         {
-            resultado=arr[count1];//Seteamos el resultado al valor identificado
+            resultado=arr[++count1];//Seteamos el resultado al valor identificado
             count1=arrsize;//Hacemos que termine el loop del "for"
         }
     }
@@ -80,8 +80,10 @@ static char* searchtxt(char** arr,int arrsize,char* word)
     {
         status=1;
         for(length=0;arr[count1][length]!=0;++length);//Calculamos el largo de la palabra nueva
-        char* check=&arr[count1][length-lengthword];//Creamos un puntero al inicio de donde deberia estar el ".xxx"
-        for(int count2=0;(check[count2]!=0 || word[count2]!=0) && status!=0;++count2)
+
+				char* check=&arr[count1][length-lengthword];//Creamos un puntero al inicio de donde deberia estar el ".xxx"
+
+				for(int count2=0;(check[count2]!=0 || word[count2]!=0) && status!=0;++count2)
         //No es necesario "!=0" pero ayuda a la comprension
         {
             if(check[count2] != word[count2])
@@ -101,11 +103,9 @@ static char* searchtxt(char** arr,int arrsize,char* word)
 static unsigned int passint(char* pointer)//Pasa un string de numeros en char a un numero unsigned int completo
 {
     unsigned int numero=0;
-
-    while(*pointer!=0)//si es igual a 0
+    while((*pointer)!=0)//si es igual a 0
     {
-        if((*pointer<'9')&&(*pointer>'0'))//Solo cargara los numeros
-              numero=numero*10+(*pointer-'0');
+            numero=numero*10+(*pointer++-'0');
     }
     return numero;
 }
