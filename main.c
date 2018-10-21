@@ -5,7 +5,7 @@ typedef char**  pointall_t;
 typedef char*   point_t;
 /**********************************DECLARACIONES**********************************/
 /*La Funcion searchvalue se encarga de buscar el valor de una opcion,debe recibir
-* el arreglo de opciones, su tamaño y el nombre de la opcion. En caso de no 
+* el arreglo de opciones, su tamaño y el nombre de la opcion. En caso de no
 * encontrarlo pasa el puntero NULL.*/
 static char* searchvalue(char** arr,int arrsize,char* word);
 /*La Funcion passint se encarga de pasar un string de numeros a unsigned int, solo
@@ -23,27 +23,16 @@ int main(int argc,char* argv[])
  	int fileflag=0;
 	pointall_t opciones, parametros;//Arreglo con las opciones y los parametros
   point_t pointdados, pointtiradas, pointcaras, archivo;
-  opciones=checkopt(argc,argv);
-<<<<<<< HEAD
-  //parametros=checkpar(argc,argv);
-  pointdados=searchword(opciones,countopt(argc,argv),"-cantidad");
-  pointtiradas=searchword(opciones,countopt(argc,argv),"-tiradas");
-  pointcaras=searchword(opciones,countopt(argc,argv),"-caras");
-  printf("cantidad:%s\ttiradas:%s\tcaras:%s\n",pointdados,pointtiradas,pointcaras);
-  dados=passint(pointdados);
-  tiradas=passint(pointtiradas);
-  caras=passint(pointcaras);
-  fullroll(tiradas,dados,caras);
-=======
-  parametros=checkpar(argc,argv);
-  pointdados=searchvalue(opciones,countopt(argc,argv),"-cantidad");
-  pointtiradas=searchvalue(opciones,countopt(argc,argv),"-tiradas");
-  pointcaras=searchvalue(opciones,countopt(argc,argv),"-caras");
-  char* file=searchtxt(parametros,countpar(argc,argv));
-  if(file)
+  opciones=checkopt(argc,argv);//Cantidad de opciones que hay
+  parametros=checkpar(argc,argv);//Cantidad de parametros que hay
+  pointdados=searchvalue(opciones,countopt(argc,argv),"-cantidad");//Puntero a la cantidad de dados
+  pointtiradas=searchvalue(opciones,countopt(argc,argv),"-tiradas");//Puntero a la cantidad de tiradas
+  pointcaras=searchvalue(opciones,countopt(argc,argv),"-caras");//Puntero a la cantidad de caras
+  archivo=searchtxt(parametros,countpar(argc,argv));
+  if(archivo)
 	{
-      output=fopen(file,"w");
-			fileflag=1;  
+      output=fopen(archivo,"w");
+			fileflag=1;
 	}
 	else
 	{
@@ -51,7 +40,6 @@ int main(int argc,char* argv[])
 	}
 
   fullroll(passint(pointtiradas),passint(pointdados),passint(pointcaras),output);
->>>>>>> ab0159ff959d4699e0c995709ceb3fbbf2e10f83
 
 	if(fileflag)
 		fclose(output);
@@ -61,11 +49,7 @@ static char* searchvalue(char** arr,int arrsize,char* word)
 {
     int status;
     char* resultado=NULL;
-<<<<<<< HEAD
-    for(int count1=0;count1<(arrsize*2);count1+=2)
-=======
-    for(int count1=0;count1<arrsize;count1+=2)//Sumamos de 2 en 2 debido a la forma del arreglo
->>>>>>> ab0159ff959d4699e0c995709ceb3fbbf2e10f83
+    for(int count1=0;count1<(arrsize*2);count1+=2)//Sumamos de 2 en 2 debido a la forma del arreglo
     {
         status=1;//Inicialmente se cree que son iguales y luego se verifica si realmente lo es
         for(int count2=0;(arr[count1][count2]!=0 || word[count2]!=0) && status!=0;++count2)
@@ -86,7 +70,7 @@ static char* searchvalue(char** arr,int arrsize,char* word)
 }
 static char* searchtxt(char** arr,int arrsize,char* word)
 {
-     
+
     int status;
     char* resultado=NULL;
     int length;//Esta variable va a indicar el largo de la palabra a analizar
@@ -117,16 +101,11 @@ static char* searchtxt(char** arr,int arrsize,char* word)
 static unsigned int passint(char* pointer)//Pasa un string de numeros en char a un numero unsigned int completo
 {
     unsigned int numero=0;
-<<<<<<< HEAD
-    while((*pointer)!=0)
-    {
-        numero=numero*10+(*pointer++-'0');
-=======
+
     while(*pointer!=0)//si es igual a 0
     {
         if((*pointer<'9')&&(*pointer>'0'))//Solo cargara los numeros
               numero=numero*10+(*pointer-'0');
->>>>>>> ab0159ff959d4699e0c995709ceb3fbbf2e10f83
     }
     return numero;
 }
