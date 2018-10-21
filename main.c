@@ -19,21 +19,30 @@ static char* searchtxt(char** arr,int arrsize,char* word);
 /***************************************MAIN***************************************/
 int main(int argc,char* argv[])
 {
-  FILE *pf;
-  pointall_t opciones, parametros;//Arreglo con las opciones y los parametros
+	FILE *output;
+ 	int fileflag=0;
+	pointall_t opciones, parametros;//Arreglo con las opciones y los parametros
   point_t pointdados, pointtiradas, pointcaras, archivo;
   opciones=checkopt(argc,argv);
   parametros=checkpar(argc,argv);
   pointdados=searchvalue(opciones,countopt(argc,argv),"-cantidad");
   pointtiradas=searchvalue(opciones,countopt(argc,argv),"-tiradas");
   pointcaras=searchvalue(opciones,countopt(argc,argv),"-caras");
-  
-  if(char* file=searchtxt(parametros,countpar(argc,argv)))
-      pf=fopen(file,"w");
-  else
+  char* file=searchtxt(parametros,countpar(argc,argv));
+  if(file)
+	{
+      output=fopen(file,"w");
+			fileflag=1;  
+	}
+	else
+	{
+		output=stdout;
+	}
 
-  fullroll(passint(pointtiradas),passint(pointdados),passint(pointcaras));
+  fullroll(passint(pointtiradas),passint(pointdados),passint(pointcaras),output);
 
+	if(fileflag)
+		fclose(output);
 }
 
 static char* searchvalue(char** arr,int arrsize,char* word)
